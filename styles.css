@@ -1,0 +1,205 @@
+body {
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    height: 100vh;
+}
+
+#left-frame {
+    box-sizing: border-box;
+    width: 75%;
+    height: 100%;
+    float: left;
+    border: 1px solid #000;
+    overflow: auto;
+    word-wrap: break-word;
+    overflow-x: hidden;
+    background-color: #090909;
+}
+
+#left-frame::-webkit-scrollbar,
+#right-frame::-webkit-scrollbar,
+#output::-webkit-scrollbar {
+    width: 0px;
+}
+
+#right-frame {
+    box-sizing: border-box;
+    width: 25%;
+    height: 100%;
+    float: left;
+    border: 1px solid #000;
+    overflow: auto;
+    background-color: #191919;
+}
+
+#left-h1 {
+    margin: 5px;
+    text-align: left;
+}
+
+#text-p,
+#output {
+    width: 100%;
+    font-size: 100%;
+    font-weight: bold;
+    background-color: #000000;
+    color: #999999;
+    height: 215px;
+    overflow-y: scroll;
+    text-align: left;
+}
+
+#text-p::selection {
+    background-color: #999999;
+    color: black;
+}
+
+#title-top {
+    width: 100%;
+    background-color: #333333;
+    border: 1px solid #000;
+    font-size: 150%;
+    position: sticky;
+    top: 0;
+    box-sizing: border-box;
+    color: white;
+}
+
+#right-a {
+    height: 280px;
+    text-align: center;
+    background-color: #111;
+}
+
+#right-btn button {
+    width: 100%;
+    font-size: 150%;
+    font-weight: bold;
+    background-color: #808080;
+    border-top: 4px solid #999;
+    border-right: 4px solid #666;
+    border-bottom: 4px solid #666;
+    border-left: 4px solid #999;
+}
+
+#right-btn button:hover {
+    background-color: #333;
+    border-top: 4px solid #444;
+    border-right: 4px solid #555;
+    border-bottom: 4px solid #555;
+    border-left: 4px solid #444;
+}
+
+#right-btn button:active {
+    border-top: 4px solid #111;
+    border-right: 4px solid #222;
+    border-bottom: 4px solid #222;
+    border-left: 4px solid #111;
+}
+
+#left-list {
+    font-size: 120%;
+    margin: 20px;
+}
+
+#left-list h1 {
+    margin: 0 0 10px 0;
+    padding-left: 15px;
+    font-weight: bold;
+    color: #adadad;
+    background-color: #222;
+    -webkit-box-shadow: 5px 5px 0 #111;
+    box-shadow: 5px 5px 0 #111;
+}
+
+#left-list button {
+    font-size: 150%;
+    padding: 5px 10px 5px 10px;
+    margin: 0 5px 5px 0;
+    font-weight: bold;
+    border-radius: 20px;
+    background-color: #222;
+    color: #888;
+}
+
+#left-list button:hover {
+    background-color: #090909;
+    color: #8f8f8f;
+}
+
+#title-top button {
+    font-size: 100%;
+    background-color: #222;
+    color: #999;
+}
+
+#title-h1-a {
+    color: rgb(255, 255, 255);
+    font-size: 70%;
+    text-decoration: none;
+}
+
+#pbtn {
+    border-top: 2px solid #000;
+}
+
+#pbtn button {
+    font-size: 120%;
+    padding: 0 5px 0 5px;
+    margin: 0 0 2px 0;
+    border-radius: 15px;
+    background-color: #222;
+    color: #aaa;
+}
+
+#pbtn button:hover {
+    color: black;
+    background-color: #666;
+}
+
+.newline,
+#sspanselect {
+    color: white;
+}
+
+button,
+.newline,
+#sspanselect {
+    user-select: none;
+}
+
+#ver {
+    position: fixed;
+    top: 0;
+    right: 25.3%;
+    font-size: 70%;
+    margin-top: 0;
+}
+
+#yt {
+    position: fixed;
+    top: 30px;
+    right: 25.3%;
+    padding: 3px;
+    float: left;
+    color: black;
+    background-color: #ff0000;
+    border-radius: 10px;
+    font-weight: bold;
+}
+
+#yt:active {
+    color: white;
+}
+
+.selectColor {
+    background-color: white;
+    color: black;
+}
+
+#textdisplay {
+    position: fixed;
+    left: 50%;
+    transform: translate(-50%);
+}
