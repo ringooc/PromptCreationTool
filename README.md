@@ -1,5 +1,4 @@
 # PromptCreationTool
-修正中
 
 プロンプト作成ツール
 https://ringooc.github.io/PromptCreationTool/
