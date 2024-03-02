@@ -1,7 +1,7 @@
 document.getElementById("leftcontainer").innerHTML += Object.entries(x).map(([key, value]) => `<a href="#${key}">${key}</a>`).join('');
 
 document.getElementById("centercontainer").innerHTML += Object.entries(x).map(([key, value]) =>
-    `<section
+        `<section
         id="${key}"
         ><h2 id="categoryHeader">${key}</h2>${Object.entries(value).map(([subKey, subValue]) =>
         `<span my_name="${subKey}"><button
@@ -13,6 +13,33 @@ document.getElementById("centercontainer").innerHTML += Object.entries(x).map(([
         >${subKey}</button></span>`).join('')}</section>`
 ).join('');
 
+function animateButtonMovement(button, sourceDiv, destinationDiv, deltaX, deltaY, duration) {
+    var buttonClone = button.cloneNode(true);
+    buttonClone.style.position = 'absolute';
+    buttonClone.style.left = button.getBoundingClientRect().left + 'px';
+    buttonClone.style.top = button.getBoundingClientRect().top + 'px';
+    document.body.appendChild(buttonClone);
+
+    var startTime = null;
+    function moveButtonAnimation(timestamp) {
+        if (!startTime) startTime = timestamp;
+        var progress = timestamp - startTime;
+        var percent = Math.min(progress / duration, 1);
+        buttonClone.style.left = (button.getBoundingClientRect().left + deltaX * percent) + 'px';
+        buttonClone.style.top = (button.getBoundingClientRect().top + deltaY * percent) + 'px';
+        if (percent < 1) {
+            requestAnimationFrame(moveButtonAnimation);
+        } else {
+            document.body.removeChild(buttonClone);
+            sourceDiv.removeChild(button);
+            destinationDiv.appendChild(button);
+            extractText('destination', 'output');
+        }
+    }
+
+    requestAnimationFrame(moveButtonAnimation);
+}
+
 function moveButton(sourceId, destinationId, button) {
     var sourceDiv = document.querySelector('[my_name="' + sourceId + '"]'),
         destinationDiv = document.querySelector('[my_name="' + destinationId + '"]');
@@ -20,9 +47,10 @@ function moveButton(sourceId, destinationId, button) {
         moveButtonUp(button);
         return;
     }
-    sourceDiv.removeChild(button);
-    destinationDiv.appendChild(button);
-    extractText('destination', 'output');
+    var deltaX = destinationDiv.getBoundingClientRect().left - button.getBoundingClientRect().left;
+    var deltaY = destinationDiv.getBoundingClientRect().top - button.getBoundingClientRect().top;
+    var duration = 100;
+    animateButtonMovement(button, sourceDiv, destinationDiv, deltaX, deltaY, duration);
 }
 
 function rightMoveButton(sourceId, destinationId, button) {
@@ -33,18 +61,44 @@ function rightMoveButton(sourceId, destinationId, button) {
         viewText("『" + button.getAttribute("prompt") + "』" + "コピーしました。");
         return;
     }
-    sourceDiv.removeChild(button);
-    destinationDiv.appendChild(button);
-    extractText('destination', 'output');
+    var deltaX = destinationDiv.getBoundingClientRect().left - button.getBoundingClientRect().left;
+    var deltaY = destinationDiv.getBoundingClientRect().top - button.getBoundingClientRect().top;
+    var duration = 100;
+    animateButtonMovement(button, sourceDiv, destinationDiv, deltaX, deltaY, duration);
 }
 
 function moveButtonUp(button) {
     var parent = button.parentNode;
-    if (button.previousElementSibling) {
-        parent.insertBefore(button, button.previousElementSibling);
+
+    var buttonClone = button.cloneNode(true);
+    buttonClone.style.position = 'absolute';
+    buttonClone.style.left = button.getBoundingClientRect().left + 'px';
+    buttonClone.style.top = button.getBoundingClientRect().top + 'px';
+    document.body.appendChild(buttonClone);
+
+    var deltaX = -50;
+    var duration = 100;
+
+    var startTime = null;
+    function moveButtonAnimation(timestamp) {
+        if (!startTime) startTime = timestamp;
+        var progress = timestamp - startTime;
+        var percent = Math.min(progress / duration, 1);
+        buttonClone.style.left = (button.getBoundingClientRect().left + deltaX * percent) + 'px';
+        if (percent < 1) {
+            requestAnimationFrame(moveButtonAnimation);
+        } else {
+            document.body.removeChild(buttonClone);
+            if (button.previousElementSibling) {
+                parent.insertBefore(button, button.previousElementSibling);
+            }
+            extractText('destination', 'output');
+        }
     }
-    extractText('destination', 'output');
+
+    requestAnimationFrame(moveButtonAnimation);
 }
+
 
 function extractText(targetDivId, outputDivId) {
     var checkbox = document.getElementById("newline").checked;
