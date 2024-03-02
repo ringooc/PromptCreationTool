@@ -83,6 +83,12 @@ section {
     margin: -15px 10px 0px 10px;
 }
 
+.promptButton {
+    background-color: #999;
+    color: #111;
+    border-radius: 20px;
+}
+
 section .promptButton {
     font-size: 200%;
     padding: 2px 5px 2px 5px;
