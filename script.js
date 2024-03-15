@@ -1,17 +1,21 @@
 document.getElementById("leftcontainer").innerHTML += Object.entries(x).map(([key, value]) => `<a href="#${key}">${key}</a>`).join('');
-
-document.getElementById("centercontainer").innerHTML += Object.entries(x).map(([key, value]) =>
-        `<section
-        id="${key}"
-        ><h2 id="categoryHeader">${key}</h2>${Object.entries(value).map(([subKey, subValue]) =>
-        `<span my_name="${subKey}"><button
-        class="promptButton"
-        onclick="moveButton('${subKey}', 'container2',this)"
-        oncontextmenu="rightMoveButton('container2', '${subKey}',this); return false;"
-        onmouseover="selectSpanInDiv('output', '${subKey}', this)"
-        prompt="${subValue}"
-        >${subKey}</button></span>`).join('')}</section>`
-).join('');
+let count = 0;
+document.getElementById("centercontainer").innerHTML += Object.entries(x).map(([key, value]) => {
+            return `<section id="${key}">
+        <h2 id="categoryHeader" onclick="clickRandomButton('${key}')">${key}</h2>
+        ${Object.entries(value).map(([subKey, subValue]) =>
+            `<span id="s${++count}">
+                <button 
+                class="promptButton"
+                onclick="movebutton(this,'s${count}','destination')"
+                oncontextmenu="rightMoveButton(this,'s${count}','destination'); return false;"
+                onmouseover="selectSpanInDiv('output', '${subKey}', this)"
+                prompt="${subValue}"
+                >${subKey}</button>
+            </span>`
+        ).join('')}
+    </section>`;
+}).join('');
 
 function animateButtonMovement(button, sourceDiv, destinationDiv, deltaX, deltaY, duration) {
     var buttonClone = button.cloneNode(true);
@@ -40,34 +44,34 @@ function animateButtonMovement(button, sourceDiv, destinationDiv, deltaX, deltaY
     requestAnimationFrame(moveButtonAnimation);
 }
 
-function moveButton(sourceId, destinationId, button) {
-    var sourceDiv = document.querySelector('[my_name="' + sourceId + '"]'),
-        destinationDiv = document.querySelector('[my_name="' + destinationId + '"]');
-    if (button.parentNode.getAttribute('my_name') === destinationId) {
-        moveButtonUp(button);
-        return;
+function movebutton(element, parentID, sendID) {
+    if (element.parentNode.id === parentID) {
+        var deltaX = document.getElementById(sendID).getBoundingClientRect().left - element.getBoundingClientRect().left;
+        var deltaY = document.getElementById(sendID).getBoundingClientRect().top - element.getBoundingClientRect().top;
+        var duration = 100;
+        animateButtonMovement(element, document.getElementById(parentID), document.getElementById(sendID), deltaX, deltaY, duration);
     }
-    var deltaX = destinationDiv.getBoundingClientRect().left - button.getBoundingClientRect().left;
-    var deltaY = destinationDiv.getBoundingClientRect().top - button.getBoundingClientRect().top;
-    var duration = 100;
-    animateButtonMovement(button, sourceDiv, destinationDiv, deltaX, deltaY, duration);
+    else{
+        moveUp(element);
+    }
+    extractText('destination', 'output');
 }
 
-function rightMoveButton(sourceId, destinationId, button) {
-    var sourceDiv = document.querySelector('[my_name="' + sourceId + '"]'),
-        destinationDiv = document.querySelector('[my_name="' + destinationId + '"]');
-    if (button.parentNode.getAttribute('my_name') === destinationId) {
-        navigator.clipboard.writeText(button.getAttribute("prompt"));
-        viewText("『" + button.getAttribute("prompt") + "』" + "コピーしました。");
-        return;
+function rightMoveButton(element, parentID, sendID){
+    if(element.parentNode.id === parentID){
+        navigator.clipboard.writeText(element.getAttribute("prompt"));
+        viewText("『" + element.getAttribute("prompt") + "』" + "コピーしました。");
     }
-    var deltaX = destinationDiv.getBoundingClientRect().left - button.getBoundingClientRect().left;
-    var deltaY = destinationDiv.getBoundingClientRect().top - button.getBoundingClientRect().top;
-    var duration = 100;
-    animateButtonMovement(button, sourceDiv, destinationDiv, deltaX, deltaY, duration);
+    else{
+        var deltaX = document.getElementById(parentID).getBoundingClientRect().left - element.getBoundingClientRect().left;
+        var deltaY = document.getElementById(parentID).getBoundingClientRect().top - element.getBoundingClientRect().top;
+        var duration = 100;
+        animateButtonMovement(element, document.getElementById(sendID), document.getElementById(parentID), deltaX, deltaY, duration);
+    }
+    
 }
 
-function moveButtonUp(button) {
+function moveUp(button) {
     var parent = button.parentNode;
 
     var buttonClone = button.cloneNode(true);
@@ -99,6 +103,13 @@ function moveButtonUp(button) {
     requestAnimationFrame(moveButtonAnimation);
 }
 
+function clickAllButtons() {
+    var buttons = document.getElementById('destination').getElementsByTagName('button');
+    var event = new MouseEvent('contextmenu');
+    for (var i = buttons.length - 1; i >= 0; i--) {
+        buttons[i].dispatchEvent(event);
+    }
+}
 
 function extractText(targetDivId, outputDivId) {
     var checkbox = document.getElementById("newline").checked;
@@ -137,4 +148,12 @@ function selectSpanInDiv(divId, spanId, button) {
         }
     }
     viewText(button.getAttribute("prompt"));
+}
+
+function clickRandomButton(buttonsId) {
+    var buttons = document.getElementById(buttonsId).getElementsByTagName('button');
+    var randomIndex = Math.floor(Math.random() * buttons.length);
+    if(document.getElementById("randomCheckbox").checked){
+        buttons[randomIndex].click();
+    }
 }
