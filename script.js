@@ -1,10 +1,10 @@
 document.getElementById("leftcontainer").innerHTML += Object.entries(x).map(([key, value]) => `<a href="#${key}">${key}</a>`).join('');
 
 document.getElementById("checkboxContainer").innerHTML += Object.entries(x).map(([key, value], hcount) =>
-    `<label><input type="checkbox" id="c${++hcount}" name="h${hcount}"><span>${key}</span></label>`).join('<br>');
+    `<label><input type="checkbox" id="c${++hcount}" name="${key}"><span>${key}</span></label>`).join('<br>');
 let count = 0;
-document.getElementById("centercontainer").innerHTML += Object.entries(x).map(([key, value], hcount) => {
-            return `<section id="h${++hcount}">
+document.getElementById("centercontainer").innerHTML += Object.entries(x).map(([key, value]) => {
+            return `<section id="${key}">
         <h2 id="categoryHeader">${key}</h2>
         ${Object.entries(value).map(([subKey, subValue]) =>
             `<span id="s${++count}">
