@@ -9,7 +9,7 @@ document.getElementById("checkboxContainer").innerHTML += '<table>' + Object.ent
 let count = 0;
 document.getElementById("centercontainer").innerHTML += Object.entries(x).map(([key, value]) => {
             return `<section id="${key}">
-        <h2 id="categoryHeader">${key}</h2>
+        <h2 id="categoryHeader" onclick="randomSelect('${key}')">${key}</h2>
         ${Object.entries(value).map(([subKey, subValue]) =>
             `<span id="s${++count}">
                 <button 
@@ -182,11 +182,22 @@ function checkCheckboxes() {
             clickRandomButton(checkbox.name);
         }
     });
-    showButton();
+    if(document.getElementById("autoClose").checked){
+        closeGui();
+    }
 }
 
 function clickRandomButton(buttonsId) {
     var buttons = document.getElementById(buttonsId).getElementsByTagName('button');
     var randomIndex = Math.floor(Math.random() * buttons.length);
     buttons[randomIndex].click();
+}
+function randomSelect(buttonsId){
+    if(document.getElementById("myself").checked){
+        clickRandomButton(buttonsId);
+    }
+}
+function closeGui(){
+    var guiContainer = document.getElementById("guiContainer");
+    guiContainer.style.display = "none";
 }
