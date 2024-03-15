@@ -1,9 +1,9 @@
 document.getElementById("leftcontainer").innerHTML += Object.entries(x).map(([key, value]) => `<a href="#${key}">${key}</a>`).join('');
 
 document.getElementById("checkboxContainer").innerHTML += '<table>' + Object.entries(x).map(([key, value], hcount) =>
-    (hcount % 3 === 0 ? '<tr>' : '') +
+    (hcount % 5 === 0 ? '<tr>' : '') +
     `<td><label><input type="checkbox" id="c${++hcount}" name="${key}"><span>${key}</span></label></td>` +
-    (hcount % 3 === 0 || hcount === Object.entries(x).length ? '</tr>' : '')
+    (hcount % 5 === 0 || hcount === Object.entries(x).length ? '</tr>' : '')
 ).join('') + '</table>';
 
 let count = 0;
