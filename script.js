@@ -1,8 +1,11 @@
 document.getElementById("leftcontainer").innerHTML += Object.entries(x).map(([key, value]) => `<a href="#${key}">${key}</a>`).join('');
+
+document.getElementById("checkboxContainer").innerHTML += Object.entries(x).map(([key, value], hcount) =>
+    `<label><input type="checkbox" id="c${++hcount}" name="h${hcount}"><span>${key}</span></label>`).join('<br>');
 let count = 0;
-document.getElementById("centercontainer").innerHTML += Object.entries(x).map(([key, value]) => {
-            return `<section id="${key}">
-        <h2 id="categoryHeader" onclick="clickRandomButton('${key}')">${key}</h2>
+document.getElementById("centercontainer").innerHTML += Object.entries(x).map(([key, value], hcount) => {
+            return `<section id="h${++hcount}">
+        <h2 id="categoryHeader">${key}</h2>
         ${Object.entries(value).map(([subKey, subValue]) =>
             `<span id="s${++count}">
                 <button 
@@ -156,4 +159,30 @@ function clickRandomButton(buttonsId) {
     if(document.getElementById("randomCheckbox").checked){
         buttons[randomIndex].click();
     }
+}
+
+function showButton(){
+    var guiContainer = document.getElementById("guiContainer");
+    if (guiContainer.style.display === "none") {
+        guiContainer.style.display = "block";
+    } else {
+        guiContainer.style.display = "none";
+    }
+}
+
+function checkCheckboxes() {
+    var checkboxes = document.getElementById("checkboxContainer").querySelectorAll('input[type="checkbox"]');
+    
+    checkboxes.forEach(function(checkbox) {
+        if(checkbox.checked){
+            clickRandomButton(checkbox.name);
+        }
+    });
+    showButton();
+}
+
+function clickRandomButton(buttonsId) {
+    var buttons = document.getElementById(buttonsId).getElementsByTagName('button');
+    var randomIndex = Math.floor(Math.random() * buttons.length);
+    buttons[randomIndex].click();
 }
