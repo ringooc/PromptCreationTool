@@ -268,8 +268,7 @@ const x = {
         "感情的な": "emotional",
         "柔軟な": "Flexible",
         "决断力のある": "decisive",
-        "控えめな": "modest",
-        "ひかえめな": "Modest"
+        "控えめな": "modest"
     },
     "笑顔": {
         "笑顔": "smile",
