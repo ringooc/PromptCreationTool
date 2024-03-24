@@ -25,12 +25,16 @@
             <label><input type="checkbox" id="autoClose" checked><span>auto close</span></label>
             <label><input type="checkbox" id="myself"><span>myself</span></label>
         </div>
-        <h1><a href="">プロンプト作成ツール</a></h1>
+
+        <h1><span id="togglebutton" onclick="leftToggle()">☰</span> <a href="">プロンプト作成ツール</a></h1>
     </header>
     <div id="container">
-        <div id="leftcontainer">
+        <div id="leftcontainer" style="display: none;">
         </div>
-        <div id="centercontainer">
+        <div id="centercontainer" title="
+ボタンの説明
+左クリック : プロンプトに追加
+右クリック : 英語をコピー">
         </div>
         <div id="rightcontainer">
             <div id="optionalContainer">
@@ -42,7 +46,10 @@
                     <br>
                     <button id="copy" onclick="copyExtract()">copy</button>
                 </div>
-                <div id="destination" my_name="container2">
+                <div id="destination" my_name="container2" title="
+ボタンの説明
+左クリック : 一つ左の要素と入れ替える
+右クリック : プロンプトから外す">
                 </div>
                 <button id="deleteButton" onclick="clickAllButtons()">Delete all</button>
             </div>
