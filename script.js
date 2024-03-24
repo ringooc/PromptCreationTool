@@ -13,6 +13,7 @@ document.getElementById("centercontainer").innerHTML += Object.entries(x).map(([
         ${Object.entries(value).map(([subKey, subValue]) =>
             `<span id="s${++count}">
                 <button 
+                
                 class="promptButton"
                 onclick="movebutton(this,'s${count}','destination')"
                 oncontextmenu="rightMoveButton(this,'s${count}','destination'); return false;"
@@ -188,10 +189,17 @@ function checkCheckboxes() {
 }
 
 function clickRandomButton(buttonsId) {
-    var buttons = document.getElementById(buttonsId).getElementsByTagName('button');
+    var buttonsContainer = document.getElementById(buttonsId);
+    if (!buttonsContainer || buttonsContainer.getElementsByTagName('button').length === 0) {
+        
+        return; // ボタンがない場合は処理を中止する
+    }
+    
+    var buttons = buttonsContainer.getElementsByTagName('button');
     var randomIndex = Math.floor(Math.random() * buttons.length);
     buttons[randomIndex].click();
 }
+
 function randomSelect(buttonsId){
     if(document.getElementById("myself").checked){
         clickRandomButton(buttonsId);
@@ -200,4 +208,13 @@ function randomSelect(buttonsId){
 function closeGui(){
     var guiContainer = document.getElementById("guiContainer");
     guiContainer.style.display = "none";
+}
+
+function leftToggle(){
+    var leftcontent = document.getElementById("leftcontainer");
+    if(leftcontent.style.display === "none"){
+        leftcontent.style.display = "block";
+    }else {
+        leftcontent.style.display = "none";
+    }
 }
