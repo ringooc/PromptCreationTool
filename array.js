@@ -203,6 +203,22 @@ const x = {
         "架空の人物": "fictional character",
         "歴史上の人物": "historical figure"
     },
+    "年齢": {
+        "大人": "adult",
+        "子供": "child",
+        "若者": "youth",
+        "若い": "young",
+        "10代": "teenager",
+        "二十歳": "Twenties",
+        "三十歳": "Thirties",
+        "四十歳": "Forties",
+        "五十歳": "Fifties",
+        "六十歳": "Sixties",
+        "七十歳": "Seventies",
+        "八十歳": "Eighties",
+        "九十歳": "Nineties",
+        "百歳以上": "Centenarian"
+    },
     "顔": {
         "細顔": "slender face",
         "丸顔": "round face",
@@ -269,6 +285,17 @@ const x = {
         "柔軟な": "Flexible",
         "决断力のある": "decisive",
         "控えめな": "modest"
+    },
+    "愛情": {
+        "愛": "Love",
+        "愛おしい": "Adorable",
+        "恋に落ちた顔": "face fallen in love",
+        "溺愛": "doting",
+        "甘える": "pamper",
+        "甘い微笑み": "sweet smile",
+        "ヤンデレ": "Yandere",
+        "優しい微笑み": "gentle smile",
+        "恋い焦がれた表情": "longing look"
     },
     "笑顔": {
         "笑顔": "smile",
@@ -386,6 +413,26 @@ const x = {
         "顔を伏せる": "face down",
         "うつろな目": "vacant eyes"
     },
+    "顔文字": {
+        ":)": ":)",
+        "O:)": "O:)",
+        ":3": ":3",
+        "=3": "=3",
+        ":D": ":D",
+        "=D": "=D",
+        "XD": "XD",
+        ":P": ":P",
+        ":þ": ":þ",
+        "XP": "XP",
+        ":(": ":(",
+        ":<": ":<",
+        ":[": ":[",
+        ":O": ":O",
+        ":@": ":@",
+        "X(": "X(",
+        ":v": ":v",
+        ":/": ":/"
+    },
     "目": {
         "閉じた目": "closed eyes",
         "ジト目": "jitome",
@@ -451,6 +498,7 @@ const x = {
         "開いた口": "open mouth",
         "半開きの口": "half-open mouth",
         "歯を見せた口": "smiling with teeth",
+        "食いしばった歯": "clenched teeth",
         "笑っている口": "laughing",
         "唇を噛む": "biting lips",
         "口を尖らせる": "pursed lips",
@@ -506,9 +554,10 @@ const x = {
         "かつら": "toupee",
         "濡れた髪": "wet hair",
         "乱れた髪": "disheveled hair",
-        "ヘアバンド": "hairband",
-        "リボン": "ribbon",
-        "片目を覆う髪": "hair covering one eye"
+        "片目を覆う髪": "hair covering one eye",
+        "前髪": "bangs",
+        "水平にカットされた髪": "blunt bangs",
+        "額の横で分けられた髪": "side bang"
     },
     "髪色": {
         "金髪": "Blonde hair",
@@ -759,7 +808,6 @@ const x = {
         "胸元": "chest area",
         "胸ポケット": "breast pocket",
         "胸の揺れ": "breast bounce",
-        "胸を張る": "puffing up chest",
         "胸元が開いた服": "low-cut clothing",
         "へそ": "navel"
     },
@@ -821,26 +869,30 @@ const x = {
         "眠い": "sleepy",
         "自撮り": "selfie",
         "泳ぐ": "swimming",
-        "腕を組む": "crossed arms",
-        "腕を伸ばす": "stretch your arms",
         "ピースサイン": "peace sign",
-        "手を上げる": "hand up",
-        "両手を広げる": "spread arms",
-        "腕を後ろに回す": "arms behind back",
         "抱きしめる": "hugging",
-        "猫の手": "paw pose",
         "座る": "sit",
         "しゃがむ": "squat",
         "ジャンプ": "jumping",
-        "片脚を上げる": "leg up",
-        "足を組む": "cross one's legs",
-        "足を伸ばす": "stretch your legs",
-        "足を広げる": "spread your legs",
         "頭を近づける": "heads together",
         "顔を寄せる": "face to face",
         "頬を寄せる": "cheek to cheek",
         "身体を寄せる": "hug",
         "後からハグする": "hug from behind",
+        "膝を抱える": "hugging knees",
+        "正座": "seiza",
+        "前かがみ": "leaning forward",
+        "胸を張る": "stretches chest",
+    },
+
+    "ポーズ_腕": {
+        "腕を組む": "crossed arms",
+        "腕を伸ばす": "stretch your arms",
+        "手を上げる": "hand up",
+        "両手を広げる": "spread arms",
+        "腕を後ろに回す": "arms behind back",
+        "腕を頭の後ろに": "arm behind the head",
+        "猫の手": "paw pose",
         "手を振る": "waving hand",
         "肘をつく": "resting on elbow",
         "手を組む": "folded hands",
@@ -855,7 +907,6 @@ const x = {
         "手を招く": "beckoning hand",
         "手を添える": "resting hand",
         "手を放す": "letting go",
-        "膝を抱える": "hugging knees",
         "手を口元に当てる": "hand over mouth",
         "手を耳に当てる": "hand to ear",
         "手を顔に当てる": "hand on face",
@@ -864,6 +915,12 @@ const x = {
         "手を口に当てる": "hand on mouth",
         "指を差す": "pointing finger",
         "指でつまむ": "pinching gesture"
+    },
+    "ポーズ_足": {
+        "片脚を上げる": "leg up",
+        "足を組む": "cross one's legs",
+        "足を伸ばす": "stretch your legs",
+        "足を広げる": "spread your legs",
     },
     "服": {
         "スーツ": "suit",
@@ -881,7 +938,17 @@ const x = {
         "タキシード": "tuxedo",
         "ドレス": "dress"
     },
-    "学校": {
+    "服_ジャンル": {
+        "カジュアル": "casual clothes",
+        "フォーマル": "formal attire",
+        "スポーティ": "sporty clothes",
+        "ボヘミアン": "bohemian outfit",
+        "レトロ": "retro outfit",
+        "エレガント": "elegant outfit",
+        "ゴシック": "gothic outfit",
+        "モード": "fashionable clothes"
+    },
+    "服_学校": {
         "学生服": "school uniform",
         "ブレザー": "blazer",
         "セーラー服": "sailor uniform",
@@ -906,7 +973,7 @@ const x = {
         "ローファー": "loafers",
         "スニーカー": "sneakers"
     },
-    "部活": {
+    "服_スポーツ": {
         "バレーボール": "volleyball uniform",
         "サッカー": "soccer uniform",
         "野球": "baseball uniform",
@@ -931,7 +998,7 @@ const x = {
         "フェンシング": "fencing uniform",
         "アーチェリー": "archery uniform"
     },
-    "上": {
+    "トップス": {
         "シャツ": "shirt",
         "ブラウス": "blouse",
         "ドレスシャツ": "dress shirt",
@@ -990,7 +1057,7 @@ const x = {
         "マキシワンピース": "maxi dress",
         "ミニワンピース": "mini dress"
     },
-    "下": {
+    "ボトムス": {
         "ジーンズ": "jeans",
         "ベイカーパンツ": "baker pants",
         "ワイドパンツ": "wide pants",
@@ -1026,9 +1093,7 @@ const x = {
     },
     "装飾": {
         "リボン": "bow",
-        "宝石": "jewelry"
-    },
-    "頭": {
+        "宝石": "jewelry",
         "帽子": "hat",
         "帽子リボン": "hat ribbon",
         "ヘアバンド": "hairband",
@@ -1133,8 +1198,7 @@ const x = {
     },
     "足": {
         "パンスト": "pantyhose",
-        "ニーソックス": "thighhighs",
-        "ニーソックス": "kneehighs",
+        "ニーソックス": "Thighhighs",
         "ガーターストラップ": "garter straps",
         "太ももまでのブーツ": "thigh boots",
         "ハイヒール": "high heels",
