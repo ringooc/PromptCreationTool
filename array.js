@@ -883,6 +883,7 @@ const x = {
         "正座": "seiza",
         "前かがみ": "leaning forward",
         "胸を張る": "stretches chest",
+        "ひざまずく": "kneel down",
     },
 
     "ポーズ_腕": {
@@ -921,6 +922,7 @@ const x = {
         "足を組む": "cross one's legs",
         "足を伸ばす": "stretch your legs",
         "足を広げる": "spread your legs",
+        "膝を立てて": "knees up",
     },
     "服": {
         "スーツ": "suit",
