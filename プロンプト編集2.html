@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GUI</title>
+    <style>
+        .container {
+            margin: 20px;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+        
+        .item {
+            margin-bottom: 10px;
+            padding: 5px;
+            border: solid 1px black;
+            flex: 1 1 calc(33.333% - 10px); /* 3列のアイテムにするための設定 */
+            box-sizing: border-box; /* パディングとボーダーを含めたサイズ計算 */
+        }
+        
+        .textbox {
+            display: block;
+            margin-bottom: 5px;
+        }
+        
+        .textbox-container {
+            display: flex;
+            margin-bottom: 5px;
+        }
+        
+        .textbox-container textarea {
+            flex: 1;
+            margin-right: 10px;
+            height: 500px;
+        }
+        
+        .button {
+            margin-right: 5px;
+        }
+        
+        .fixed-element {
+            position: fixed;
+            top: 10px;
+            right: 10px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="fixed-element">
+        <button onclick="addItemTop()">一番上に項目を追加</button>
+        <button onclick="outputData()">出力</button>
+        <button onclick="saveData()">データを保存</button>
+    </div>
+
+    <div id="container" class="container"></div>
+    <script src="array.js"></script>
+    <script>
+        var container = document.getElementById("container");
+    
+        function renderItems() {
+            container.innerHTML = "";
+            Object.keys(x).forEach(key => {
+                container.appendChild(createItem(key, x[key]));
+            });
+        }
+    
+        function createItem(key, itemData) {
+            var itemDiv = document.createElement("div");
+            itemDiv.classList.add("item");
+    
+            itemDiv.innerHTML = `
+                <input class="textbox" type="text" value="${key}">
+                <div class="textbox-container">
+                    <textarea class="textbox" placeholder="keyを追加">${Object.keys(itemData).join("\n")}</textarea>
+                    <textarea class="textbox" placeholder="valueを追加">${Object.values(itemData).join("\n")}</textarea>
+                </div>
+                <button class="button" onclick="deleteItem(this)">この項目の削除</button>
+                <button class="button" onclick="addItemBelow(this)">下に項目の追加</button>
+                <button class="button">未定</button>
+            `;
+    
+            return itemDiv;
+        }
+    
+        function addItemTop() {
+            container.insertBefore(createItem("", {}), container.firstChild);
+        }
+    
+        function outputData() {
+            console.log(JSON.stringify(collectData(), null, 2));
+        }
+    
+        function saveData() {
+            var dataScript = "var x = " + JSON.stringify(collectData(), null, 2) + ";";
+            var blob = new Blob([dataScript], { type: "text/javascript" });
+            var url = URL.createObjectURL(blob);
+    
+            var a = document.createElement("a");
+            a.href = url;
+            a.download = "array.js";
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
+            URL.revokeObjectURL(url);
+        }
+    
+        function deleteItem(button) {
+            button.parentElement.remove();
+        }
+    
+        function addItemBelow(button) {
+            button.parentElement.insertAdjacentElement('afterend', createItem("", {}));
+        }
+    
+        function collectData() {
+            var output = {};
+            document.querySelectorAll(".item").forEach(item => {
+                var itemName = item.querySelector("input[type='text']").value;
+                var keys = item.querySelectorAll("textarea")[0].value.trim().split("\n");
+                var values = item.querySelectorAll("textarea")[1].value.trim().split("\n");
+                var itemData = {};
+                keys.forEach((key, index) => itemData[key] = values[index]);
+                output[itemName] = itemData;
+            });
+            return output;
+        }
+    
+        renderItems();
+    </script>
+
+</body>
+
+</html>
